@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useState } from 'react';
 import { FaHome, FaRegArrowAltCircleRight, FaUserEdit, FaBars } from 'react-icons/fa';
 import { NavLink } from 'react-router-dom';
 import style from './Sidebar.module.css'
@@ -8,6 +8,10 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ children }) => {
+
+  const[isOpen, setIsOpen] = useState(false);
+  const toggle = () => setIsOpen(!isOpen);
+
   const menuItem = [
     {
         path: '/',
@@ -28,10 +32,10 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
 
   return (
     <div className={style.container}>
-        <div className={style.sidebar}>
+        <div style={{ width:isOpen ? "200px" : "50px" }} className={style.sidebar}>
             <div className={style.top_section}>
                 <div className={style.bars}>
-                    <FaBars/>
+                    <FaBars onClick={toggle}/>
                 </div>
             </div>
             {
